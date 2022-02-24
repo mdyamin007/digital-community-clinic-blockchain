@@ -1,8 +1,52 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useMoralis } from "react-moralis";
+import { Link, Navigate } from "react-router-dom";
 import Image from "../assets/images/signup.png";
 
 const Signup = () => {
+  const { signup, isAuthenticating, isAuthenticated, authError, user } =
+    useMoralis();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [DOB, setDOB] = useState("");
+  const [fatherName, setFatherName] = useState("");
+  const [motherName, setMotherName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [username, setUsername] = useState("");
+  const [NID, setNID] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    await e.preventDefault();
+    setFirstName(e.target[0].value);
+    setLastName(e.target[1].value);
+    setDOB(e.target[2].value);
+    setFatherName(e.target[3].value);
+    setMotherName(e.target[4].value);
+    setUsername(e.target[8].value);
+    setPhone(e.target[6].value);
+    setEmail(e.target[7].value);
+    setNID(e.target[8].value);
+    setPassword(e.target[9].value);
+    setConfirmPassword(e.target[10].value);
+    await signup(username, password, email, {
+      firstName,
+      lastName,
+      DOB,
+      fatherName,
+      motherName,
+      phone,
+      NID,
+    });
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
+
   return (
     <div className="w-full px-20 py-14 flex items-center justify-center bg-rose-200">
       <div className="px-20 py-10 bg-white rounded-2xl shadow-2xl flex">
@@ -15,74 +59,77 @@ const Signup = () => {
             Register
           </h4>
 
-          <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-            <div class="mb-4 md:flex md:justify-between">
-              <div class="mb-4 md:mr-2 md:mb-0">
+          <form
+            className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
+            onSubmit={handleSubmit}
+          >
+            <div className="mb-4 md:flex md:justify-between">
+              <div className="mb-4 md:mr-2 md:mb-0">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="firstName"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="firstName"
                 >
                   First Name
                 </label>
                 <input
-                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="firstName"
                   type="text"
                   placeholder="First Name"
                 />
               </div>
-              <div class="md:ml-2">
+              <div className="md:ml-2">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="lastName"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="lastName"
                 >
                   Last Name
                 </label>
                 <input
-                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="lastName"
                   type="text"
                   placeholder="Last Name"
                 />
               </div>
-              <div class="md:ml-2">
+              <div className="md:ml-2">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="dateOfBirth"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="dateOfBirth"
                 >
                   Date of Birth
                 </label>
                 <input
-                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="dateOfBirth"
                   type="date"
                 />
               </div>
             </div>
-            <div class="mb-4 md:flex ">
-              <div class="w-1/2 mb-4 md:mr-4 md:mb-0">
+            <div className="mb-4 md:flex ">
+              <div className="w-1/2 mb-4 md:mr-4 md:mb-0">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="fatherName"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="fatherName"
                 >
                   Father Name
                 </label>
                 <input
-                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="fatherName"
                   type="text"
                   placeholder="Father Name"
                 />
               </div>
-              <div class="md:ml-4 w-1/2">
+              <div className="md:ml-4 w-1/2">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="motherName"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="motherName"
                 >
                   Mother Name
                 </label>
                 <input
-                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="motherName"
                   type="text"
                   placeholder="Mother Name"
@@ -90,30 +137,29 @@ const Signup = () => {
               </div>
             </div>
 
-            <div class="mb-4 md:flex">
-              <div class="w-1/2 mb-4 md:mr-4 md:mb-0">
+            <div className="mb-4 md:flex">
+              <div className="w-1/2 mb-4 md:mr-4 md:mb-0">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="email"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="username"
                 >
-                  Email
+                  Medical ID
                 </label>
                 <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="email"
-                  type="email"
-                  placeholder="Email"
+                  className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  placeholder="No need to give"
+                  disabled
                 />
               </div>
-              <div class="md:ml-4 w-1/2">
+              <div className="md:ml-4 w-1/2">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="mobileNo"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="mobileNo"
                 >
                   Mobile No.
                 </label>
                 <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="mobileNo"
                   type="phone"
                   placeholder="+880"
@@ -121,80 +167,83 @@ const Signup = () => {
               </div>
             </div>
             <div className="mb-4 md:flex">
-              <div class="w-1/2 mb-4 md:mr-4 md:mb-0">
+              <div className="w-1/2 mb-4 md:mr-4 md:mb-0">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="photo"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="email"
                 >
-                  Profile Picture
+                  Email
                 </label>
                 <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="photo"
-                  type="file"
+                  className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  id="email"
+                  type="email"
+                  placeholder="Email"
                 />
               </div>
-              <div class="md:ml-4 w-1/2">
+
+              <div className="md:ml-4 w-1/2">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="nid"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="nid"
                 >
                   NID No. / Birth Certificate No.
                 </label>
                 <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="nid"
                   type="text"
                 />
               </div>
             </div>
-            <div class="mb-4 md:flex md:justify-between">
-              <div class="w-1/2 mb-4 md:mr-4 md:mb-0">
+            <div className="mb-4 md:flex md:justify-between">
+              <div className="w-1/2 mb-4 md:mr-4 md:mb-0">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="password"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="password"
                 >
                   Password
                 </label>
                 <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="password"
                   type="password"
                   placeholder="******************"
                 />
-                <p class="text-xs italic text-red-500">
+                <p className="text-xs italic text-red-500">
                   Please choose a password.
                 </p>
               </div>
-              <div class="md:ml-4 w-1/2">
+              <div className="md:ml-4 w-1/2">
                 <label
-                  class="block mb-2 text-sm font-bold text-gray-700"
-                  for="c_password"
+                  className="block mb-2 text-sm font-bold text-gray-700"
+                  htmlFor="c_password"
                 >
                   Confirm Password
                 </label>
                 <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="c_password"
                   type="password"
                   placeholder="******************"
                 />
               </div>
             </div>
-            <div class="mb-6 text-center">
+            <div className="mb-6 text-center">
               <button
-                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                type="button"
+                className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                type="submit"
+                disabled={isAuthenticating}
               >
                 Register Account
               </button>
             </div>
-            <hr class="mb-6 border-t" />
+            <hr className="mb-6 border-t" />
 
-            <div class="text-center">
+            <div className="text-center">
               <Link
                 to="/login"
-                class="inline-block hover:underline text-sm text-blue-500 align-baseline hover:text-blue-800"
+                className="inline-block hover:underline text-sm text-blue-500 align-baseline hover:text-blue-800"
                 href="./index.html"
               >
                 Already have an account? Log in!
@@ -202,13 +251,6 @@ const Signup = () => {
             </div>
           </form>
         </div>
-        {/* <div className="w-1/3 bg-blue-300 inline-flex items-center justify-center">
-          <img
-            src={Image}
-            alt="Image"
-            style={{ height: "204px", width: "204px", objectFit: "contain" }}
-          />
-        </div> */}
       </div>
     </div>
   );

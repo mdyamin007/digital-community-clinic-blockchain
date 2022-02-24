@@ -26,12 +26,14 @@ const Hero = () => {
                 Patient
               </button>
             </Link>
-            <button
-              type="button"
-              className="text-xl mr-4 px-4 py-2 bg-white cursor-pointer rounded-md text-blue-400 border border-blue-400 font-bold hover:bg-blue-400 hover:text-white transiton ease-in-out duration-300"
-            >
-              Doctor
-            </button>
+            <Link to="/doctor">
+              <button
+                type="button"
+                className="text-xl mr-4 px-4 py-2 bg-white cursor-pointer rounded-md text-blue-400 border border-blue-400 font-bold hover:bg-blue-400 hover:text-white transiton ease-in-out duration-300"
+              >
+                Doctor
+              </button>
+            </Link>
           </div>
         </div>
         <div className="-mt-8 w-full z-0">
