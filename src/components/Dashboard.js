@@ -30,8 +30,7 @@ const Dashboard = () => {
           <Link to="/view">
             <li className="pl-6 py-3">View</li>
           </Link>
-          <li className="pl-6 py-3">Update</li>
-          <a href="https://aidoctor.herokuapp.com/">
+          <a href="https://ai-doctor-new.herokuapp.com/">
             <li className="pl-6 py-3 text-red-600">AI Doctor</li>
           </a>
           <li

@@ -16,15 +16,15 @@ const NavBar = () => {
       <div>
         <ul className="flex my-4 mr-10 text-blue-400 text-lg">
           <li className="my-2 mr-8">
-            <a href="https://aidoctor.herokuapp.com" rel="noreferrer noopener">
+            <a
+              href="https://ai-doctor-new.herokuapp.com/"
+              rel="noreferrer noopener"
+            >
               AI Doctor
             </a>
           </li>
           <li className="my-2 mr-8">
             <Link to="/services">Services</Link>
-          </li>
-          <li className="my-2 mr-8">
-            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </div>

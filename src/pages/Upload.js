@@ -27,7 +27,7 @@ const Upload = () => {
   return (
     <>
       <NavBar />
-      <div className="w-full min-h-screen flex flex-col justify-center items-center">
+      <div className="w-full bg-gray-100 min-h-screen flex flex-col justify-center items-center">
         {isUploading ? (
           <div className="my-4">
             <button
